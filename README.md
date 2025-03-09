@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TronRent - Tron Energy Rental Service
+
+TronRent is a platform that allows users to rent Tron energy resources on-demand, helping them save on transaction fees and optimize their DApp performance without long-term staking commitments.
+
+## Features
+
+- **Instant Energy Access**: Get immediate access to Tron energy resources without long-term staking commitments.
+- **Cost-Effective**: Pay only for the energy you need, reducing overall transaction costs on the Tron network.
+- **Secure & Trustless**: Our smart contracts ensure secure, transparent, and trustless energy rental transactions.
+- **Flexible Rental Options**: Choose from various rental packages based on your needs and budget.
+- **Provider Opportunities**: Stake your TRX and earn passive income by becoming an energy provider.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js 18.0 or later
+- npm or yarn
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   ```bash
+   git clone https://github.com/yourusername/tronrent.git
+   cd tronrent
+   ```
 
-## Learn More
+2. Install dependencies:
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Run the development server:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
 
-## Deploy on Vercel
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Technology Stack
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Frontend**: Next.js, React, TailwindCSS
+- **Blockchain Integration**: TronWeb (to be implemented)
+- **Smart Contracts**: Solidity (to be implemented)
+
+## Roadmap
+
+- [x] Initial landing page
+- [ ] Wallet connection functionality
+- [ ] Smart contract development for energy rental
+- [ ] User dashboard for managing rentals
+- [ ] Provider dashboard for managing energy offerings
+- [ ] Payment integration
+- [ ] Mobile optimization
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Contact
+
+For any inquiries, please reach out to us at contact@tronrent.com (placeholder).
+
+---
+
+Built with ❤️ for the Tron community.
