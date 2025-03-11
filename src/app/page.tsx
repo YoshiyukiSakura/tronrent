@@ -99,7 +99,8 @@ export default function Home() {
               Get Energy
             </Heading>
             <Text color="gray.300" mb={6}>
-              Use TRON energy for your transactions to save gas fees
+              Use TRON energy for your transactions to get 0 charge of TRX gas
+              fees
             </Text>
 
             <Box mb={6}>
