@@ -12,7 +12,7 @@ export default function Home() {
   const [step, setStep] = useState("idle");
 
   useEffect(() => {
-    if (address) {
+    if (address && inputAddress === "") {
       setInputAddress(address);
     }
   }, [address]);
@@ -214,8 +214,8 @@ export default function Home() {
                     return;
                   }
 
-                  if (!address) {
-                    alert("Please connect your TronLink wallet first");
+                  if (!inputAddress) {
+                    alert("Please input the address needs Energy");
                     return;
                   }
 
@@ -225,7 +225,7 @@ export default function Home() {
                     setStep("building");
 
                     const tx = await tronweb.transactionBuilder.sendTrx(
-                      address ?? "",
+                      inputAddress ?? "",
                       Number(((amount / 65000) * 2.9).toFixed(2)) * 1000000, // Convert TRX to SUN (1 TRX = 1,000,000 SUN)
                       `TEFo6e9GLKaVD6ac42dgKnSU2m6Rnfx8uo`
                     ); // Step1
@@ -237,8 +237,42 @@ export default function Home() {
                     console.log("sign", signedTx);
 
                     setStep("sending");
-                    await tronweb.trx.sendRawTransaction(signedTx); // Step3
+                    const result = await tronweb.trx.sendRawTransaction(
+                      signedTx
+                    ); // Step3
+                    // const result = {
+                    //   result: true,
+                    //   txid: "f1ca2fab9432bd23cba5ecf24eef28a44db65578edfb81edbea4a3297dd3f980",
+                    // };
+                    // console.log("result", result);
+                    if (result.result) {
+                      // Send API request to notify the server about the transaction
+                      try {
+                        setStep("sending Energy");
+                        const apiResponse = await fetch(
+                          "https://api.tronrent.com/",
+                          {
+                            method: "POST",
+                            headers: {
+                              "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                              hash: result.txid,
+                              targetAddress: inputAddress,
+                            }),
+                          }
+                        );
 
+                        if (!apiResponse.ok) {
+                          console.error("failed:", await apiResponse.text());
+                        } else {
+                          console.log("success");
+                        }
+                      } catch (apiError) {
+                        console.error("Error notifying API:", apiError);
+                        // Continue with the flow even if API notification fails
+                      }
+                    }
                     setStep("completed");
                   }
                 } catch (e) {
