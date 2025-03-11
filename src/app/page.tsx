@@ -5,10 +5,8 @@ import { useState } from "react";
 
 export default function Home() {
   const [amount, setAmount] = useState(65000);
-  const [duration, setDuration] = useState("1h");
-  const [isLoading, setIsLoading] = useState(false);
 
-  const handleAmountChange = (value) => {
+  const handleAmountChange = (value: number) => {
     if (value > 0) {
       setAmount(value);
     }
@@ -151,7 +149,7 @@ export default function Home() {
                 </div>
               </div>
               <input
-                onChange={(e) => handleAmountChange(e.target.value)}
+                onChange={(e) => handleAmountChange(Number(e.target.value))}
                 type="text"
                 value={amount}
                 className="w-full px-3 py-2 bg-[#1c2128] border border-[#30363d] rounded-md text-white focus:outline-none focus:ring-1 focus:ring-[#f05e23] mb-2"
