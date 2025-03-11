@@ -33,7 +33,7 @@ export default function Home() {
             alt="TronRent Logo"
             width={40}
             height={40}
-            className="rounded-full bg-[#c23631]"
+            className="rounded-full"
           />
           <h1 className="text-2xl font-bold bg-gradient-to-r from-[#c23631] to-[#f05e23] text-transparent bg-clip-text">
             TronRent
