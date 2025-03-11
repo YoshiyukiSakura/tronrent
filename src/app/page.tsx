@@ -27,10 +27,11 @@ export default function Home() {
   const [amount, setAmount] = useState(65000);
   const [inputAddress, setInputAddress] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [userEditFlag, setUserEditFlag] = useState(false);
   const [step, setStep] = useState("idle");
 
   useEffect(() => {
-    if (address && inputAddress === "") {
+    if (address && inputAddress === "" && !userEditFlag) {
       setInputAddress(address);
     }
   }, [inputAddress, address]);
@@ -117,7 +118,10 @@ export default function Home() {
               <Flex gap={2}>
                 <Input
                   value={inputAddress}
-                  onChange={(e) => setInputAddress(e.target.value)}
+                  onChange={(e) => {
+                    setUserEditFlag(true);
+                    setInputAddress(e.target.value);
+                  }}
                   placeholder="Enter TRON address"
                   bg="#1c2128"
                   border="1px"
