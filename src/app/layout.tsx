@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { WalletProvider } from "./providers/WalletProvider";
 import PlausibleProvider from "next-plausible";
+import { Toaster } from "@/components/ui/toaster";
+import { Provider } from "@/components/ui/provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -61,9 +63,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <PlausibleProvider domain="tronrent.com">
-          <WalletProvider>{children}</WalletProvider>
-        </PlausibleProvider>
+        <Provider>
+          <PlausibleProvider domain="tronrent.com">
+            <WalletProvider>
+              {children}
+              <Toaster />
+            </WalletProvider>
+          </PlausibleProvider>
+        </Provider>
       </body>
     </html>
   );

@@ -3,6 +3,7 @@ import Image from "next/image";
 import WalletButton from "@/components/WalletButton";
 import { useEffect, useState } from "react";
 import { useWallet } from "@tronweb3/tronwallet-adapter-react-hooks";
+import { toaster } from "@/components/ui/toaster";
 
 export default function Home() {
   const { address, connect } = useWallet();
@@ -15,7 +16,7 @@ export default function Home() {
     if (address && inputAddress === "") {
       setInputAddress(address);
     }
-  }, [address]);
+  }, [inputAddress, address]);
 
   const handleAmountChange = (value: number) => {
     if (value > 0) {
@@ -210,18 +211,28 @@ export default function Home() {
 
                   // Check if amount is a multiple of 65000
                   if (amount % 65000 !== 0) {
-                    alert("Amount must be a multiple of 65000");
+                    toaster.create({
+                      type: "info",
+                      description: "Amount must be a multiple of 65000",
+                    });
                     return;
                   }
 
                   if (!inputAddress) {
-                    alert("Please input the address needs Energy");
+                    toaster.create({
+                      type: "info",
+                      description: "Please input the address needs Energy",
+                    });
                     return;
                   }
 
                   if (window?.tronLink?.ready) {
                     const tronweb = window.tronLink.tronWeb;
-                    console.log("building");
+                    toaster.create({
+                      type: "info",
+                      description: "Building transaction...",
+                      duration: 99000,
+                    });
                     setStep("building");
 
                     const tx = await tronweb.transactionBuilder.sendTrx(
@@ -231,12 +242,21 @@ export default function Home() {
                     ); // Step1
                     console.log("tx:", tx);
 
-                    console.log("start sign");
                     setStep("signing");
+                    toaster.create({
+                      type: "info",
+                      description: "Signing transaction...",
+                      duration: 99000,
+                    });
                     const signedTx = await tronweb.trx.sign(tx); // Step2
                     console.log("sign", signedTx);
 
                     setStep("sending");
+                    toaster.create({
+                      type: "info",
+                      description: "Sending transaction...",
+                      duration: 99000,
+                    });
                     const result = await tronweb.trx.sendRawTransaction(
                       signedTx
                     ); // Step3
@@ -246,9 +266,19 @@ export default function Home() {
                     // };
                     // console.log("result", result);
                     if (result.result) {
+                      toaster.create({
+                        type: "success",
+                        description: "Transaction sent successfully",
+                        duration: 99000,
+                      });
                       // Send API request to notify the server about the transaction
                       try {
                         setStep("sending Energy");
+                        toaster.create({
+                          type: "info",
+                          description: "Sending Energy to your account...",
+                          duration: 99000,
+                        });
                         const apiResponse = await fetch(
                           "https://api.tronrent.com/",
                           {
@@ -266,6 +296,11 @@ export default function Home() {
                         if (!apiResponse.ok) {
                           console.error("failed:", await apiResponse.text());
                         } else {
+                          toaster.create({
+                            type: "success",
+                            description: "Energy sent successfully",
+                            duration: 99000,
+                          });
                           console.log("success");
                         }
                       } catch (apiError) {
