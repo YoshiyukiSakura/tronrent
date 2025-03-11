@@ -10,7 +10,7 @@ export default function WalletButton() {
   const [connectError, setConnectError] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // 格式化地址显示
+  // Format address display
   const formatAddress = (address: string) => {
     if (!address) return "";
     return `${address.substring(0, 6)}...${address.substring(
@@ -18,13 +18,13 @@ export default function WalletButton() {
     )}`;
   };
 
-  // 格式化余额显示
+  // Format balance display
   const formatBalance = (balance: number | null) => {
     if (balance === null) return "0";
     return balance.toFixed(2);
   };
 
-  // 处理连接按钮点击
+  // Handle connect button click
   const handleConnectClick = async () => {
     console.log("Connect button clicked, isConnected:", isConnected);
     setConnectError(null);
@@ -43,7 +43,7 @@ export default function WalletButton() {
     }
   };
 
-  // 处理断开连接
+  // Handle disconnect
   const handleDisconnect = async (e: React.MouseEvent) => {
     e.stopPropagation();
     try {
@@ -54,7 +54,7 @@ export default function WalletButton() {
     }
   };
 
-  // 处理点击外部关闭下拉菜单
+  // Handle clicking outside to close dropdown
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -107,7 +107,7 @@ export default function WalletButton() {
                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
               ></path>
             </svg>
-            连接中...
+            Connecting...
           </span>
         ) : isConnected ? (
           <span className="flex items-center">
@@ -115,7 +115,7 @@ export default function WalletButton() {
             {formatAddress(address || "")}
           </span>
         ) : (
-          "连接钱包"
+          "Connect Wallet"
         )}
       </button>
 
@@ -138,11 +138,11 @@ export default function WalletButton() {
           onClick={(e) => e.stopPropagation()}
         >
           <div className="p-4 border-b border-[#30363d]">
-            <p className="text-sm text-gray-400">钱包地址</p>
+            <p className="text-sm text-gray-400">Wallet Address</p>
             <p className="text-sm font-mono text-white break-all">{address}</p>
           </div>
           <div className="p-4 border-b border-[#30363d]">
-            <p className="text-sm text-gray-400">TRX 余额</p>
+            <p className="text-sm text-gray-400">TRX Balance</p>
             <p className="text-lg font-semibold text-white">
               {formatBalance(balance)} TRX
             </p>
@@ -152,7 +152,7 @@ export default function WalletButton() {
               onClick={handleDisconnect}
               className="w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-[#30363d] rounded transition-colors"
             >
-              断开连接
+              Disconnect
             </button>
           </div>
         </div>
