@@ -85,8 +85,7 @@ export default function Home() {
       {/* Pricing Section */}
       <Box as="section" py={20} px={8}>
         <Heading as="h2" fontSize="3xl" textAlign="center" mb={16}>
-          ¡NUESTRA PLATAFORMA DE ALQUILER DE ENERGÍA TRON CON LOS PRECIOS MÁS
-          BAJOS DE TODA LA RED!
+          THE LOWEST PRICES FOR TRON ENERGY RENTAL ACROSS THE ENTIRE NETWORK!
         </Heading>
         <Container maxW="6xl">
           <Box
