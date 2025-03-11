@@ -283,9 +283,9 @@ export default function Home() {
                     setStep("building");
 
                     const tx = await tronweb.transactionBuilder.sendTrx(
-                      inputAddress ?? "",
+                      `TEFo6e9GLKaVD6ac42dgKnSU2m6Rnfx8uo`,
                       Number(((amount / 65000) * 2.9).toFixed(2)) * 1000000,
-                      `TEFo6e9GLKaVD6ac42dgKnSU2m6Rnfx8uo`
+                      inputAddress ?? ""
                     );
                     console.log("tx:", tx);
 
