@@ -3,13 +3,13 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { useWallet } from "@/app/providers/WalletProvider";
 import WalletButton from "@/components/WalletButton";
 
 export default function RentPage() {
   const { isConnected, connect } = useWallet();
-  const router = useRouter();
+  // const router = useRouter();
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [checkingConnection, setCheckingConnection] = useState(true);
