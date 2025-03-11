@@ -49,6 +49,7 @@ export default function Home() {
       flexDir="column"
       bgGradient="linear(to-b, #0d1117, #161b22)"
       color="white"
+      bg="black"
     >
       {/* Header */}
       <Box
@@ -189,6 +190,7 @@ export default function Home() {
                   variant="outline"
                   borderColor="#30363d"
                   bg="#1c2128"
+                  color="white"
                 >
                   USDT Tsf
                 </Button>
@@ -198,6 +200,7 @@ export default function Home() {
                   variant="outline"
                   borderColor="#30363d"
                   bg="#1c2128"
+                  color="white"
                 >
                   Double
                 </Button>
@@ -207,6 +210,7 @@ export default function Home() {
                   variant="outline"
                   borderColor="#30363d"
                   bg="#1c2128"
+                  color="white"
                 >
                   3x
                 </Button>
@@ -216,6 +220,7 @@ export default function Home() {
                   variant="outline"
                   borderColor="#30363d"
                   bg="#1c2128"
+                  color="white"
                 >
                   4x
                 </Button>
@@ -225,6 +230,7 @@ export default function Home() {
                   variant="outline"
                   borderColor="#30363d"
                   bg="#1c2128"
+                  color="white"
                 >
                   10x
                 </Button>
