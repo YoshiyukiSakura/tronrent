@@ -1,6 +1,19 @@
+"use client";
 import Image from "next/image";
+import WalletButton from "@/components/WalletButton";
+import { useState } from "react";
 
 export default function Home() {
+  const [amount, setAmount] = useState(65000);
+  const [duration, setDuration] = useState("1h");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleAmountChange = (value) => {
+    if (value > 0) {
+      setAmount(value);
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#0d1117] to-[#161b22] text-white">
       {/* Header */}
@@ -18,7 +31,7 @@ export default function Home() {
           </h1>
         </div>
         <nav>
-          <ul className="flex gap-6">
+          {/* <ul className="flex gap-6">
             <li>
               <a
                 href="#features"
@@ -48,349 +61,176 @@ export default function Home() {
                 Contact
               </a>
             </li>
-          </ul>
+          </ul> */}
         </nav>
-        <button className="bg-[#c23631] hover:bg-[#f05e23] transition-colors px-4 py-2 rounded-md font-medium">
-          Connect Wallet
-        </button>
+        <WalletButton />
       </header>
-
-      {/* Hero Section */}
-      <section className="flex flex-col items-center justify-center text-center px-4 py-20 flex-grow">
-        <h2 className="text-5xl font-bold mb-6 max-w-3xl">
-          Rent Tron Energy Resources When You Need Them
-        </h2>
-        <p className="text-xl text-gray-300 mb-10 max-w-2xl">
-          Save on transaction fees and optimize your DApp performance with
-          on-demand Tron energy rentals
-        </p>
-        <div className="flex gap-4">
-          <button className="bg-[#c23631] hover:bg-[#f05e23] transition-colors px-6 py-3 rounded-md font-medium text-lg">
-            Rent Energy Now
-          </button>
-          <button className="border border-[#c23631] hover:border-[#f05e23] hover:text-[#f05e23] transition-colors px-6 py-3 rounded-md font-medium text-lg">
-            Become a Provider
-          </button>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section id="features" className="py-20 px-8 bg-[#0d1117]">
-        <h2 className="text-3xl font-bold text-center mb-16">
-          Why Choose TronRent?
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          <div className="bg-[#161b22] p-6 rounded-lg border border-[#30363d]">
-            <div className="w-12 h-12 bg-[#c23631] rounded-full flex items-center justify-center mb-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M13 10V3L4 14h7v7l9-11h-7z"
-                />
-              </svg>
-            </div>
-            <h3 className="text-xl font-bold mb-2">Instant Energy Access</h3>
-            <p className="text-gray-300">
-              Get immediate access to Tron energy resources without long-term
-              staking commitments.
-            </p>
-          </div>
-          <div className="bg-[#161b22] p-6 rounded-lg border border-[#30363d]">
-            <div className="w-12 h-12 bg-[#c23631] rounded-full flex items-center justify-center mb-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            </div>
-            <h3 className="text-xl font-bold mb-2">Cost-Effective</h3>
-            <p className="text-gray-300">
-              Pay only for the energy you need, reducing overall transaction
-              costs on the Tron network.
-            </p>
-          </div>
-          <div className="bg-[#161b22] p-6 rounded-lg border border-[#30363d]">
-            <div className="w-12 h-12 bg-[#c23631] rounded-full flex items-center justify-center mb-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                />
-              </svg>
-            </div>
-            <h3 className="text-xl font-bold mb-2">Secure & Trustless</h3>
-            <p className="text-gray-300">
-              Our smart contracts ensure secure, transparent, and trustless
-              energy rental transactions.
-            </p>
-          </div>
-        </div>
-      </section>
 
       {/* Pricing Section */}
       <section id="pricing" className="py-20 px-8">
         <h2 className="text-3xl font-bold text-center mb-16">
-          Simple, Transparent Pricing
+          ¡NUESTRA PLATAFORMA DE ALQUILER DE ENERGÍA TRON CON LOS PRECIOS MÁS
+          BAJOS DE TODA LA RED!
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="bg-[#161b22] p-8 rounded-lg border border-[#30363d] flex flex-col">
-            <h3 className="text-xl font-bold mb-2">Basic</h3>
+            <h3 className="text-xl font-bold mb-2">Buy Energy</h3>
             <p className="text-gray-300 mb-6">
-              For small transactions and testing
+              Rent TRON energy for your transactions
             </p>
-            <div className="text-4xl font-bold mb-6">10 TRX</div>
-            <ul className="mb-8 flex-grow">
-              <li className="flex items-center gap-2 mb-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 text-green-500"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <span>1,000 Energy Units</span>
-              </li>
-              <li className="flex items-center gap-2 mb-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 text-green-500"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <span>24-hour rental period</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 text-green-500"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <span>Basic support</span>
-              </li>
-            </ul>
-            <button className="bg-[#c23631] hover:bg-[#f05e23] transition-colors px-4 py-2 rounded-md font-medium w-full">
-              Rent Now
-            </button>
-          </div>
-          <div className="bg-[#161b22] p-8 rounded-lg border border-[#c23631] flex flex-col relative">
-            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-[#c23631] px-4 py-1 rounded-full text-sm font-bold">
-              Most Popular
+
+            <div className="mb-6">
+              <div className="flex items-center justify-between mb-2">
+                <label className="flex items-center text-sm text-gray-300">
+                  Resource target address
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-4 w-4 ml-1 text-gray-400"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </label>
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="text"
+                  placeholder="Enter TRON address"
+                  className="w-full px-3 py-2 bg-[#1c2128] border border-[#30363d] rounded-md text-white focus:outline-none focus:ring-1 focus:ring-[#f05e23]"
+                />
+                <button className="bg-transparent border border-[#30363d] px-3 py-2 rounded-md">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 text-white"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path d="M8 2a1 1 0 000 2h2a1 1 0 100-2H8z" />
+                    <path d="M3 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v6h-4.586l1.293-1.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L10.414 13H15v3a2 2 0 01-2 2H5a2 2 0 01-2-2V5zM15 11h2a1 1 0 110 2h-2v-2z" />
+                  </svg>
+                </button>
+              </div>
             </div>
-            <h3 className="text-xl font-bold mb-2">Standard</h3>
-            <p className="text-gray-300 mb-6">For regular DApp users</p>
-            <div className="text-4xl font-bold mb-6">50 TRX</div>
-            <ul className="mb-8 flex-grow">
-              <li className="flex items-center gap-2 mb-2">
+
+            <div className="mb-6">
+              <div className="flex items-center justify-between mb-2">
+                <label className="flex items-center text-sm text-gray-300">
+                  Amount
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-4 w-4 ml-1 text-gray-400"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </label>
+                <div className="flex items-center">
+                  <span className="text-sm text-gray-300">Advance</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 ml-1 text-gray-400"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <input
+                onChange={(e) => handleAmountChange(e.target.value)}
+                type="text"
+                value={amount}
+                className="w-full px-3 py-2 bg-[#1c2128] border border-[#30363d] rounded-md text-white focus:outline-none focus:ring-1 focus:ring-[#f05e23] mb-2"
+              />
+              <div className="flex gap-2 mb-4">
+                <button
+                  onClick={() => handleAmountChange(65000)}
+                  className="cursor-pointer bg-[#1c2128] border border-[#30363d] px-3 py-1 rounded-md text-sm text-white"
+                >
+                  USDT Trf
+                </button>
+                <button
+                  onClick={() => handleAmountChange(130000)}
+                  className="cursor-pointer bg-[#1c2128] border border-[#30363d] px-3 py-1 rounded-md text-sm text-white"
+                >
+                  Double
+                </button>
+                <button
+                  onClick={() => handleAmountChange(100000)}
+                  className="cursor-pointer bg-[#1c2128] border border-[#30363d] px-3 py-1 rounded-md text-sm text-white"
+                >
+                  3x
+                </button>
+                <button
+                  onClick={() => handleAmountChange(200000)}
+                  className="cursor-pointer bg-[#1c2128] border border-[#30363d] px-3 py-1 rounded-md text-sm text-white"
+                >
+                  4x
+                </button>
+                <button
+                  onClick={() => handleAmountChange(650000)}
+                  className="cursor-pointer bg-[#1c2128] border border-[#30363d] px-3 py-1 rounded-md text-sm text-white"
+                >
+                  10x
+                </button>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center">
+                <span className="text-sm text-gray-300 mr-2">
+                  Saving TRX by renting energy
+                </span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 text-green-500"
+                  className="h-4 w-4 text-gray-400"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
                   <path
                     fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9z"
                     clipRule="evenodd"
                   />
                 </svg>
-                <span>10,000 Energy Units</span>
-              </li>
-              <li className="flex items-center gap-2 mb-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 text-green-500"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <span>3-day rental period</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 text-green-500"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <span>Priority support</span>
-              </li>
-            </ul>
-            <button className="bg-[#c23631] hover:bg-[#f05e23] transition-colors px-4 py-2 rounded-md font-medium w-full">
-              Rent Now
-            </button>
-          </div>
-          <div className="bg-[#161b22] p-8 rounded-lg border border-[#30363d] flex flex-col">
-            <h3 className="text-xl font-bold mb-2">Enterprise</h3>
-            <p className="text-gray-300 mb-6">For businesses and power users</p>
-            <div className="text-4xl font-bold mb-6">200 TRX</div>
-            <ul className="mb-8 flex-grow">
-              <li className="flex items-center gap-2 mb-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 text-green-500"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <span>50,000 Energy Units</span>
-              </li>
-              <li className="flex items-center gap-2 mb-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 text-green-500"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <span>7-day rental period</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 text-green-500"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <span>24/7 dedicated support</span>
-              </li>
-            </ul>
-            <button className="bg-[#c23631] hover:bg-[#f05e23] transition-colors px-4 py-2 rounded-md font-medium w-full">
-              Rent Now
+              </div>
+              <div>
+                <span className="text-gray-400 line-through mr-2">
+                  {(amount / 5000).toFixed(2)} TRX
+                </span>
+                <span className="text-green-500 font-bold">
+                  {((amount / 65000) * 2.9).toFixed(2)} TRX
+                </span>
+              </div>
+            </div>
+
+            <button className="bg-[#4ade80] hover:bg-[#22c55e] transition-colors px-4 py-3 rounded-md font-medium w-full text-black relative">
+              Rent Energy for 1 hour
+              <div className="absolute -top-4 right-0 bg-yellow-400 px-3 py-1 rounded-md text-black font-bold transform rotate-6">
+                SAVE{" "}
+                {(
+                  ((amount / 5000 - (amount / 65000) * 2.9) / (amount / 5000)) *
+                  100
+                ).toFixed(0)}
+                %
+              </div>
             </button>
           </div>
         </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section id="faq" className="py-20 px-8 bg-[#0d1117]">
-        <h2 className="text-3xl font-bold text-center mb-16">
-          Frequently Asked Questions
-        </h2>
-        <div className="max-w-3xl mx-auto space-y-6">
-          <div className="bg-[#161b22] p-6 rounded-lg border border-[#30363d]">
-            <h3 className="text-xl font-bold mb-2">What is Tron Energy?</h3>
-            <p className="text-gray-300">
-              Tron Energy is a resource on the Tron blockchain that is consumed
-              when executing smart contracts or performing certain transactions.
-              Having sufficient energy reduces the TRX cost of transactions.
-            </p>
-          </div>
-          <div className="bg-[#161b22] p-6 rounded-lg border border-[#30363d]">
-            <h3 className="text-xl font-bold mb-2">
-              How does energy rental work?
-            </h3>
-            <p className="text-gray-300">
-              Our platform connects users who need energy with providers who
-              have staked TRX. Through our smart contracts, providers can
-              delegate their energy to users for a specified period in exchange
-              for a fee.
-            </p>
-          </div>
-          <div className="bg-[#161b22] p-6 rounded-lg border border-[#30363d]">
-            <h3 className="text-xl font-bold mb-2">
-              Is it safe to rent energy?
-            </h3>
-            <p className="text-gray-300">
-              Yes, our platform uses secure smart contracts that have been
-              audited by leading security firms. The rental process is trustless
-              and transparent, with all transactions recorded on the Tron
-              blockchain.
-            </p>
-          </div>
-          <div className="bg-[#161b22] p-6 rounded-lg border border-[#30363d]">
-            <h3 className="text-xl font-bold mb-2">
-              How do I become an energy provider?
-            </h3>
-            <p className="text-gray-300">
-              To become a provider, you need to stake TRX on the Tron network
-              and register on our platform. Once registered, you can list your
-              available energy for rental and earn passive income.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section id="contact" className="py-20 px-8 text-center">
-        <h2 className="text-3xl font-bold mb-6">
-          Ready to Optimize Your Tron Experience?
-        </h2>
-        <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-          Join thousands of users saving on transaction costs with TronRent
-        </p>
-        <button className="bg-[#c23631] hover:bg-[#f05e23] transition-colors px-8 py-4 rounded-md font-medium text-lg">
-          Get Started Now
-        </button>
       </section>
 
       {/* Footer */}
