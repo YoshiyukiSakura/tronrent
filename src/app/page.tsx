@@ -323,7 +323,7 @@ export default function Home() {
                           duration: 99000,
                         });
                         const apiResponse = await fetch(
-                          "https://api.tronrent.com/",
+                          "https://sjo.fee.xhain.io/php/energy.php",
                           {
                             method: "POST",
                             headers: {
