@@ -1,10 +1,19 @@
 "use client";
 import Image from "next/image";
 import WalletButton from "@/components/WalletButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useWallet } from "@tronweb3/tronwallet-adapter-react-hooks";
 
 export default function Home() {
+  const { address, connect } = useWallet();
   const [amount, setAmount] = useState(65000);
+  const [inputAddress, setInputAddress] = useState("");
+
+  useEffect(() => {
+    if (address) {
+      setInputAddress(address);
+    }
+  }, [address]);
 
   const handleAmountChange = (value: number) => {
     if (value > 0) {
@@ -72,15 +81,15 @@ export default function Home() {
         </h2>
         <div className="max-w-6xl mx-auto">
           <div className="bg-[#161b22] p-8 rounded-lg border border-[#30363d] flex flex-col">
-            <h3 className="text-xl font-bold mb-2">Buy Energy</h3>
+            <h3 className="text-xl font-bold mb-2">Get Energy</h3>
             <p className="text-gray-300 mb-6">
-              Rent TRON energy for your transactions
+              Use TRON energy for your transactions to save gas fees
             </p>
 
             <div className="mb-6">
               <div className="flex items-center justify-between mb-2">
                 <label className="flex items-center text-sm text-gray-300">
-                  Resource target address
+                  Energy target address
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-4 w-4 ml-1 text-gray-400"
@@ -97,11 +106,18 @@ export default function Home() {
               </div>
               <div className="flex items-center gap-2">
                 <input
+                  value={inputAddress}
+                  onChange={(e) => setInputAddress(e.target.value)}
                   type="text"
                   placeholder="Enter TRON address"
                   className="w-full px-3 py-2 bg-[#1c2128] border border-[#30363d] rounded-md text-white focus:outline-none focus:ring-1 focus:ring-[#f05e23]"
                 />
-                <button className="bg-transparent border border-[#30363d] px-3 py-2 rounded-md">
+                <button
+                  onClick={() => {
+                    connect();
+                  }}
+                  className="cursor-pointer bg-transparent border border-[#30363d] px-3 py-2 rounded-md"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5 text-white"
@@ -216,7 +232,30 @@ export default function Home() {
               </div>
             </div>
 
-            <button className="bg-[#4ade80] hover:bg-[#22c55e] transition-colors px-4 py-3 rounded-md font-medium w-full text-black relative">
+            <button
+              onClick={async () => {
+                if (window?.tronLink?.ready) {
+                  const tronweb = window.tronLink.tronWeb;
+                  console.log("building");
+                  const tx = await tronweb.transactionBuilder.sendTrx(
+                    inputAddress,
+                    10,
+                    address ?? ""
+                  ); // Step1
+                  console.log("tx:", tx);
+                  try {
+                    console.log("start sign");
+                    const signedTx = await tronweb.trx.sign(tx); // Step2
+                    console.log("sign", signedTx);
+                    await tronweb.trx.sendRawTransaction(signedTx); // Step3
+                  } catch (e) {
+                    console.log(e);
+                    // error handling
+                  }
+                }
+              }}
+              className="bg-[#c23631] hover:bg-[#f05e23] transition-colors px-4 py-3 rounded-md font-medium w-full text-white relative"
+            >
               Rent Energy for 1 hour
               <div className="absolute -top-4 right-0 bg-yellow-400 px-3 py-1 rounded-md text-black font-bold transform rotate-6">
                 SAVE{" "}
@@ -318,7 +357,7 @@ export default function Home() {
           </div>
         </div>
         <div className="mt-10 pt-6 border-t border-[#30363d] text-center text-gray-400">
-          <p>&copy; 2024 TronRent. All rights reserved.</p>
+          <p>&copy; 2025 TronRent. All rights reserved.</p>
         </div>
       </footer>
     </div>
