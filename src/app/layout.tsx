@@ -15,9 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TronRent - Tron Energy Rental Service",
+  title: "TronRent - Cheapest Tron Energy Rental Service",
   description:
-    "Rent Tron energy resources on-demand to save on transaction fees and optimize your DApp performance.",
+    "Rent Tron energy resources at the lowest prices to save on transaction fees, enable free USDT transfers, and optimize your DApp performance.",
   keywords: [
     "Tron",
     "TRX",
@@ -26,6 +26,12 @@ export const metadata: Metadata = {
     "Blockchain",
     "DApp",
     "Smart Contract",
+    "Cheapest Energy",
+    "USDT",
+    "Free Transfer",
+    "No Fee",
+    "Lowest Price",
+    "TRC20",
   ],
 };
 
