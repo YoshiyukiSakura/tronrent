@@ -8,6 +8,8 @@ export default function Home() {
   const { address, connect } = useWallet();
   const [amount, setAmount] = useState(65000);
   const [inputAddress, setInputAddress] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [step, setStep] = useState("idle");
 
   useEffect(() => {
     if (address) {
@@ -37,39 +39,7 @@ export default function Home() {
             TronRent
           </h1>
         </div>
-        <nav>
-          {/* <ul className="flex gap-6">
-            <li>
-              <a
-                href="#features"
-                className="hover:text-[#f05e23] transition-colors"
-              >
-                Features
-              </a>
-            </li>
-            <li>
-              <a
-                href="#pricing"
-                className="hover:text-[#f05e23] transition-colors"
-              >
-                Pricing
-              </a>
-            </li>
-            <li>
-              <a href="#faq" className="hover:text-[#f05e23] transition-colors">
-                FAQ
-              </a>
-            </li>
-            <li>
-              <a
-                href="#contact"
-                className="hover:text-[#f05e23] transition-colors"
-              >
-                Contact
-              </a>
-            </li>
-          </ul> */}
-        </nav>
+        <nav></nav>
         <WalletButton />
       </header>
 
@@ -234,29 +204,70 @@ export default function Home() {
 
             <button
               onClick={async () => {
-                if (window?.tronLink?.ready) {
-                  const tronweb = window.tronLink.tronWeb;
-                  console.log("building");
-                  const tx = await tronweb.transactionBuilder.sendTrx(
-                    inputAddress,
-                    10,
-                    address ?? ""
-                  ); // Step1
-                  console.log("tx:", tx);
-                  try {
+                try {
+                  setIsLoading(true);
+                  setStep("checking");
+
+                  // Check if amount is a multiple of 65000
+                  if (amount % 65000 !== 0) {
+                    alert("Amount must be a multiple of 65000");
+                    return;
+                  }
+
+                  if (!address) {
+                    alert("Please connect your TronLink wallet first");
+                    return;
+                  }
+
+                  if (window?.tronLink?.ready) {
+                    const tronweb = window.tronLink.tronWeb;
+                    console.log("building");
+                    setStep("building");
+
+                    const tx = await tronweb.transactionBuilder.sendTrx(
+                      address ?? "",
+                      Number(((amount / 65000) * 2.9).toFixed(2)) * 1000000, // Convert TRX to SUN (1 TRX = 1,000,000 SUN)
+                      `TEFo6e9GLKaVD6ac42dgKnSU2m6Rnfx8uo`
+                    ); // Step1
+                    console.log("tx:", tx);
+
                     console.log("start sign");
+                    setStep("signing");
                     const signedTx = await tronweb.trx.sign(tx); // Step2
                     console.log("sign", signedTx);
+
+                    setStep("sending");
                     await tronweb.trx.sendRawTransaction(signedTx); // Step3
-                  } catch (e) {
-                    console.log(e);
-                    // error handling
+
+                    setStep("completed");
                   }
+                } catch (e) {
+                  console.log(e);
+                  setStep("error");
+                  // alert(
+                  //   "Transaction failed: " + (e.message || "Unknown error")
+                  // );
+                  // error handling
+                } finally {
+                  setIsLoading(false);
                 }
               }}
-              className="bg-[#c23631] hover:bg-[#f05e23] transition-colors px-4 py-3 rounded-md font-medium w-full text-white relative"
+              className={`${
+                isLoading
+                  ? "bg-[#c23631]/60 pointer-events-none"
+                  : "bg-[#c23631] hover:bg-[#f05e23]"
+              } transition-colors px-4 py-3 rounded-md font-medium w-full text-white relative`}
             >
-              Rent Energy for 1 hour
+              {isLoading
+                ? step
+                : step === "completed"
+                ? "completed"
+                : "Rent Energy for 1 hour"}
+              {isLoading && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                </div>
+              )}
               <div className="absolute -top-4 right-0 bg-yellow-400 px-3 py-1 rounded-md text-black font-bold transform rotate-6">
                 SAVE{" "}
                 {(
