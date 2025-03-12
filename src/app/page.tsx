@@ -54,7 +54,7 @@ export default function Home() {
       {/* Maintenance Message */}
       <Center flex="1">
         <Container maxW="md" textAlign="center">
-          <VStack spacing={6}>
+          <VStack gap={6}>
             <Heading
               as="h2"
               fontSize="3xl"
@@ -64,8 +64,8 @@ export default function Home() {
               Under Maintenance
             </Heading>
             <Text color="gray.300" fontSize="lg">
-              Our system is currently not ready for business. We're working hard
-              to improve our services and will be back soon.
+              Our system is currently not ready for business. We&apos;re working
+              hard to improve our services and will be back soon.
             </Text>
             <Box
               borderWidth="1px"
